@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <h1>Calculadora de senos y cosenos</h1>
-    <form action="/calculadora">
+    <h1>Send response</h1>
+    <form action="/logservicefacade">
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" value="John"><br><br>
         <input type="button" value="Submit" onclick="loadGetMsg()">
@@ -24,54 +24,10 @@
                 document.getElementById("getrespmsg").innerHTML =
                     this.responseText;
             }
-            xhttp.open("GET", "/calculadora?val=" + nameVar);
+            xhttp.open("GET", "/logservicefacade?val=" + nameVar);
             xhttp.send();
         }
     </script>
-
-<h1>Determinar si una cadena es palindromo</h1>
-<form action="/palindromo">
-    <label for="name1">Name:</label><br>
-    <input type="text" id="name1" name="name1" value="John"><br><br>
-    <input type="button" value="Submit" onclick="loadGetMsg1()">
-</form>
-<div id="getrespmsg1"></div>
-
-<script>
-    function loadGetMsg1() {
-        let nameVar = document.getElementById("name1").value;
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-            document.getElementById("getrespmsg1").innerHTML =
-                this.responseText;
-        }
-        xhttp.open("GET", "/palindromo?val=" + nameVar);
-        xhttp.send();
-    }
-</script>
-
-
-<h1>Magnitud de un vector real (dos dimensiones)</h1>
-<form action="/vector">
-    <label for="name2">Name:</label><br>
-    <input type="text" id="name2" name="name2" value="John"><br><br>
-    <input type="button" value="Submit" onclick="loadGetMsg2()">
-</form>
-<div id="getrespmsg2"></div>
-
-<script>
-    function loadGetMsg2() {
-        let nameVar = document.getElementById("name2").value;
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-            document.getElementById("getrespmsg2").innerHTML =
-                this.responseText;
-        }
-        xhttp.open("GET", "/vector?val=" + nameVar);
-        xhttp.send();
-    }
-</script>
-
 </body>
 
 </html>
