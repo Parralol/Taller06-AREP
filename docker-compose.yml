@@ -2,13 +2,37 @@ version: '2'
 
 
 services:
-    web:
+    rest1:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: web
+        container_name: rest1
         ports:
-            - "8087:6000"
+          - "35001"
+    rest2:
+            build:
+                context: .
+                dockerfile: Dockerfile
+            container_name: rest2
+            ports:
+            - "35002"
+
+    rest3:
+            build:
+                context: .
+                dockerfile: Dockerfile
+            container_name: rest3
+            ports:
+            - "35003"
+    
+    facade:
+            build:
+                context: .
+                dockerfile: Dockerfile1
+            container_name:  facade
+            ports:
+            - "8080:6000"
+
     db:
         image: mongo:3.6.1
         container_name: db

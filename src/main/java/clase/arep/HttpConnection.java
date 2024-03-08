@@ -44,8 +44,6 @@ public class HttpConnection {
     }
 
     private void check(){
-        instancia = (instancia +1) % get_URL.length ;
-
-
+        instancia = (instancia+1) % get_URL.length ;
     }
 } 
