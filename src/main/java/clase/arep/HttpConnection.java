@@ -9,14 +9,14 @@ import java.net.URL;
 public class HttpConnection {
 
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static  String get_URL = "";
-
-    public  HttpConnection(String invokerUrl){
-        get_URL = invokerUrl;
+    private static  String[] get_URL = null;
+    private int instancia = 0;
+    public  HttpConnection(String[] invokerUrls){
+        get_URL = invokerUrls;
     }
     public String Invoke(String[] args) throws IOException {
-
-        URL obj = new URL(get_URL);
+        check();
+        URL obj = new URL(get_URL[instancia]);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);
@@ -43,4 +43,9 @@ public class HttpConnection {
         return response.toString();
     }
 
+    private void check(){
+        instancia = (instancia +1) % get_URL.length ;
+
+
+    }
 } 
