@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class HttpConnection {
 
@@ -17,6 +18,7 @@ public class HttpConnection {
     public String Invoke(String[] args) throws IOException {
         check();
         URL obj = new URL(get_URL[instancia]);
+        System.out.println(obj.toString());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);
@@ -43,6 +45,9 @@ public class HttpConnection {
         return response.toString();
     }
 
+    public static List<String> getLogs(){
+        return null;
+    }
     private void check(){
         instancia = (instancia+1) % get_URL.length ;
     }

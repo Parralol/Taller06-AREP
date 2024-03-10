@@ -8,22 +8,22 @@ services:
             dockerfile: Dockerfile1
         container_name: rest1
         ports:
-          - "35001:6000"
+          - "35001:6001"
     rest2:
             build:
                 context: .
-                dockerfile: Dockerfile2
+                dockerfile: Dockerfile1
             container_name: rest2
             ports:
-            - "35002:6000"
+            - "35002:6001"
 
     rest3:
             build:
                 context: .
-                dockerfile: Dockerfile3
+                dockerfile: Dockerfile1
             container_name: rest3
             ports:
-            - "35003:6000"
+            - "35003:6001"
     
     facade:
             build:
