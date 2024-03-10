@@ -9,6 +9,8 @@ services:
         container_name: rest1
         ports:
           - "35001:6001"
+        networks:
+          - default
     rest2:
             build:
                 context: .
@@ -16,6 +18,8 @@ services:
             container_name: rest2
             ports:
             - "35002:6001"
+            networks:
+            - default
 
     rest3:
             build:
@@ -24,6 +28,8 @@ services:
             container_name: rest3
             ports:
             - "35003:6001"
+            networks:
+            - default
     
     facade:
             build:
@@ -32,6 +38,8 @@ services:
             container_name:  facade
             ports:
             - "8087:6000"
+            networks:
+            - default
 
     db:
         image: mongo:3.6.1
