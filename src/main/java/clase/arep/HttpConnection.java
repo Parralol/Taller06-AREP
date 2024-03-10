@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HttpConnection {
 
     private static final String USER_AGENT = "Mozilla/5.0";
     private static  String[] get_URL = null;
-    private static int instancia = 0;
+    private  int instancia = 0;
     public  HttpConnection(String[] invokerUrls){
         get_URL = invokerUrls;
     }
@@ -45,7 +46,7 @@ public class HttpConnection {
         return response.toString();
     }
 
-    public static List<String> getLog(String[] args) throws IOException{
+    public List<String> getLog(String[] args) throws IOException{
         check();
         URL obj = new URL(get_URL[instancia]);
         System.out.println(obj.toString());
@@ -56,7 +57,7 @@ public class HttpConnection {
         //The following invocation perform the connection implicitly before getting the code
         int responseCode = con.getResponseCode();
         System.out.println("GET Response Code :: " + responseCode);
-        List<String> response = null;
+        List<String> response = new ArrayList<String>();
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
@@ -78,7 +79,7 @@ public class HttpConnection {
     /**
      * Checks round number
      */
-    private static void check(){
+    private void check(){
         instancia = (instancia+1) % get_URL.length ;
     }
 

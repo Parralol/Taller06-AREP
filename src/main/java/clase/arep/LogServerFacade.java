@@ -7,7 +7,7 @@ import static spark.Spark.staticFiles;
 
 public class LogServerFacade {
     private static final String[] LOG_SERVICE_URL = {"http://localhost:35001/logservicefacade","http://localhost:35002/logservicefacade","http://localhost:35003/logservicefacade"};
-    
+
    //private static final String[] LOG_SERVICE_URL = {"http://localhost:35000/logservicefacade","http://localhost:35000/logservicefacade","http://localhost:35000/logservicefacade"};
     public static void main(String[] args){
         HttpConnection invoker = new HttpConnection(LOG_SERVICE_URL);
@@ -20,8 +20,7 @@ public class LogServerFacade {
         get("/favicon.ico", (req,res) -> {return "";});
 
         get("/logs", (req,res) -> {
-            String log = req.queryParams("log");
-            return HttpConnection.getLog(args);
+            return invoker.getLog(args);
         });        
     }
     
