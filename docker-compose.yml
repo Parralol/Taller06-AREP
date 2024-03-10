@@ -5,14 +5,14 @@ services:
     rest1:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile1
         container_name: rest1
         ports:
           - "35001:6000"
     rest2:
             build:
                 context: .
-                dockerfile: Dockerfile
+                dockerfile: Dockerfile2
             container_name: rest2
             ports:
             - "35002:6000"
@@ -20,7 +20,7 @@ services:
     rest3:
             build:
                 context: .
-                dockerfile: Dockerfile
+                dockerfile: Dockerfile3
             container_name: rest3
             ports:
             - "35003:6000"
@@ -28,10 +28,10 @@ services:
     facade:
             build:
                 context: .
-                dockerfile: Dockerfile1
+                dockerfile: Dockerfile
             container_name:  facade
             ports:
-            - "8080:6000"
+            - "8087:6000"
 
     db:
         image: mongo:3.6.1
