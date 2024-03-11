@@ -22,24 +22,13 @@ public final class DbConnection {
         MongoClientSettings settings = MongoClientSettings.builder()
         .applyConnectionString(new ConnectionString(connectionString))
         .build();
-    // Connect to MongoDB
     try (com.mongodb.client.MongoClient mongoClient = MongoClients.create(settings)) {
-    // Connect to the "test" database (update with your desired database name)
     MongoDatabase database = mongoClient.getDatabase("db");
-
-    // Create a collection (table) named "myTable"
     collection = database.getCollection("logs");
-
-    // Create an index on the "dateAdded" field for better performance
     collection.createIndex(new Document("date", 1));
-
-    // Create a document with a text field and the current date
     Document document = new Document("text", message)
             .append("date", new Date());
-
-    // Insert the document into the collection
     collection.insertOne(document);
-
     System.out.println("Document added to the collection successfully.");
 } catch (Exception e) {
     System.err.println("Error: " + e.getMessage());
@@ -66,8 +55,6 @@ public final class DbConnection {
                 Date fecha = docu.getDate("date");
                 listLogs.add(fecha + " " + mensaje);
             }
-
-            // Convert the list to a JSON-formatted string
             return objectMapper.writeValueAsString(listLogs);
         } catch (Exception e) {
             System.err.println("Error al obtener el registro en MongoDB: " + e.getMessage());
