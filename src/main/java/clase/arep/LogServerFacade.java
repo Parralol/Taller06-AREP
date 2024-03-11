@@ -6,7 +6,7 @@ import static spark.Spark.port;
 import static spark.Spark.staticFiles;
 
 public class LogServerFacade {
-    private static final String[] LOG_SERVICE_URL = {"http://localhost:35001/logservicefacade","http://localhost:35002/logservicefacade","http://localhost:35003/logservicefacade"};
+    private static final String[] LOG_SERVICE_URL = {"http://rest1:35001/logservicefacade","http://rest2:35002/logservicefacade","http://rest3:35003/logservicefacade"};
 
    //private static final String[] LOG_SERVICE_URL = {"http://localhost:35000/logservicefacade","http://localhost:35000/logservicefacade","http://localhost:35000/logservicefacade"};
     public static void main(String[] args){
