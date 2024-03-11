@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import spark.Request;
+
 public class HttpConnection {
 
     private static final String USER_AGENT = "Mozilla/5.0";
@@ -16,6 +18,14 @@ public class HttpConnection {
     public  HttpConnection(String[] invokerUrls){
         get_URL = invokerUrls;
     }
+
+    /**
+     * Generates a generic response
+     * 
+     * @param args
+     * @return
+     * @throws IOException
+     */
     public String Invoke(String[] args) throws IOException {
         check();
         URL obj = new URL(get_URL[instancia]);
@@ -46,7 +56,13 @@ public class HttpConnection {
         return response.toString();
     }
 
-    public List<String> getLog(String[] args) throws IOException{
+    /**
+     * returns a log connecting to the mongodb
+     * @param args
+     * @return
+     * @throws IOException
+     */
+    public List<String> getLog(Request args) throws IOException{
         check();
         URL obj = new URL(get_URL[instancia]);
         System.out.println(obj.toString());
