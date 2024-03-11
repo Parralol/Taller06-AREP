@@ -1,5 +1,7 @@
 package clase.arep;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -13,11 +15,14 @@ import java.util.List;
 import org.bson.Document;
 
 public final class DbConnection {
-
+    static String connectionString = "mongodb://root:pass@db:27017/logs";
+    static MongoCollection<Document> collection;
     public static void addLog(String message){
-        try(MongoClient client = MongoClients.create("mongodb://db:27017/logs")){
+        MongoClientSettings settings = MongoClientSettings.builder().applyConnectionString(new ConnectionString(connectionString))
+                .build();
+        try(MongoClient client = MongoClients.create(settings)){
             MongoDatabase db = client.getDatabase("logs");
-            MongoCollection<Document> collection = db.getCollection("logs");
+            collection = db.getCollection("logs");
             Document logEntry = new Document();
             logEntry.append("Message", message);
             logEntry.append("Date", new Date());
