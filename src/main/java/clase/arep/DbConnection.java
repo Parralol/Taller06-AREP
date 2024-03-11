@@ -1,5 +1,6 @@
 package clase.arep;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -15,42 +16,61 @@ import java.util.List;
 import org.bson.Document;
 
 public final class DbConnection {
-    static String connectionString = "mongodb://root:pass@db:27017/logs";
+    static String connectionString = "mongodb://db:27017";
     static MongoCollection<Document> collection;
     public static void addLog(String message){
-        MongoClientSettings settings = MongoClientSettings.builder().applyConnectionString(new ConnectionString(connectionString))
-                .build();
-        try(MongoClient client = MongoClients.create(settings)){
-            MongoDatabase db = client.getDatabase("logs");
-            collection = db.getCollection("logs");
-            Document logEntry = new Document();
-            logEntry.append("Message", message);
-            logEntry.append("Date", new Date());
-            collection.insertOne(logEntry);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(new ConnectionString(connectionString))
+        .build();
+    // Connect to MongoDB
+    try (com.mongodb.client.MongoClient mongoClient = MongoClients.create(settings)) {
+    // Connect to the "test" database (update with your desired database name)
+    MongoDatabase database = mongoClient.getDatabase("db");
+
+    // Create a collection (table) named "myTable"
+    collection = database.getCollection("logs");
+
+    // Create an index on the "dateAdded" field for better performance
+    collection.createIndex(new Document("date", 1));
+
+    // Create a document with a text field and the current date
+    Document document = new Document("text", message)
+            .append("date", new Date());
+
+    // Insert the document into the collection
+    collection.insertOne(document);
+
+    System.out.println("Document added to the collection successfully.");
+} catch (Exception e) {
+    System.err.println("Error: " + e.getMessage());
+    e.printStackTrace();
+}
     }
 
-     public static List<String> getLogs() {
-        try (MongoClient mongoClient = MongoClients.create("mongodb://mongo-db:27017/logs")){
-            MongoDatabase db = mongoClient.getDatabase("logs");
+     public static String getLogs() {
+        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            MongoDatabase db = mongoClient.getDatabase("db");
             MongoCollection<Document> collection = db.getCollection("logs");
-            List<Document> ultimas10Cadenas = collection
+
+            List<Document> rep = collection
                     .find()
-                    .sort(Sorts.descending("fecha"))
+                    .sort(Sorts.descending("date"))
                     .limit(10)
                     .into(new ArrayList<>());
-            ArrayList<String> listLogs = new ArrayList<>();
-            for (Document doc : ultimas10Cadenas) {
-                String mensaje = doc.getString("mensaje");
-                Date fecha = doc.getDate("fecha");
-                listLogs.add(fecha + " " +   mensaje);
+
+            List<String> listLogs = new ArrayList<>();
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            for (Document docu : rep) {
+                String mensaje = docu.getString("text");
+                Date fecha = docu.getDate("date");
+                listLogs.add(fecha + " " + mensaje);
             }
-            return listLogs;
+
+            // Convert the list to a JSON-formatted string
+            return objectMapper.writeValueAsString(listLogs);
         } catch (Exception e) {
             System.err.println("Error al obtener el registro en MongoDB: " + e.getMessage());
-
         }
         return null;
     }

@@ -12,8 +12,9 @@ public class LogService {
         get("/logservicefacade", (req,res) -> {res.type("application/json");
             return "{\"a\":{\"b\":\"data\"}}";});
 
-        get("/log", (req,res) -> {
+        get("/logs", (req,res) -> {
             String message = req.queryParams("val");
+            res.type("application/json");
             DbConnection.addLog(message);
             return DbConnection.getLogs();});
     }

@@ -64,7 +64,7 @@ public class HttpConnection {
      */
     public List<String> getLog(Request args) throws IOException{
         check();
-        URL obj = new URL(get_URL[instancia] + "?val=" + args);
+        URL obj = new URL(get_URL[instancia] + "?val=" + args.queryParamsValues("val")[0]);
         System.out.println(obj.toString());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
