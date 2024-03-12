@@ -40,7 +40,7 @@ No hace falta aclarar que tambien se uso AWS para el despliegue del programa.
 
   ![image](https://github.com/Parralol/Taller06-AREP/assets/110953563/23992d8b-22c8-4a77-a576-98de070ccba0)
 
-  A la hora de escribir algo y presionar "submit" se enviara un query al estilo http://localhost:3500x/log?val= siendo x un numero del 1 al 3, y la comunicacion con docker se realiza por el puerto 6001, quedando el query como http://restx:6001/log?val= siendo x un numero cualquiera del 1 al 3, el query se procesa y se envia a la base de datos mongo.
+  A la hora de escribir algo y presionar "submit" se enviara un query al estilo http://localhost:3500x/log?val= siendo x un numero del 1 al 3, y la comunicacion con docker se realiza por el puerto 6001, quedando el query como http://restx:6001/log?val= siendo x un numero cualquiera del 1 al 3, el query se procesa y se envia a la base de datos mongo para luego retornar los datos de la misma.
   
   ## Arquitectura del programa
 
