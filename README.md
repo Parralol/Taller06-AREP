@@ -28,7 +28,19 @@ No hace falta aclarar que tambien se uso AWS para el despliegue del programa.
       
   Seguido de
 
-      mvn clean install
+      mvn install
+
+  Luego se ejecuta
+
+      docker pull parralol/taller06_arep
+
+      docker-compose up -d
+
+  y obtendras la siguiente generacion de imagenes:
+
+  ![image](https://github.com/Parralol/Taller06-AREP/assets/110953563/e0087cd2-d024-4598-8d9d-01dc50157671)
+
+  
 
 ## Ejecucion Tests
 
@@ -74,5 +86,9 @@ https://github.com/Parralol/Taller06-AREP/assets/110953563/51c9f290-c654-488e-9b
 
   * AWS
 
+#### Respecto al despliegue
+
+  se tuvo que instalar docker, git, maven y docker-compose
+  
 ## Autor
   *  Santiago parra
