@@ -40,7 +40,10 @@ No hace falta aclarar que tambien se uso AWS para el despliegue del programa.
 
   ![image](https://github.com/Parralol/Taller06-AREP/assets/110953563/e0087cd2-d024-4598-8d9d-01dc50157671)
 
-  
+  despliegue en pruebas:
+
+  ![image](https://github.com/Parralol/Taller06-AREP/assets/110953563/c527facb-14bc-45f5-a2d8-902595ccffb4)
+
 
 ## Ejecucion Tests
 
