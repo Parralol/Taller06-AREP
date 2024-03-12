@@ -49,6 +49,10 @@ Posee un servidor el cual ejecutara el RoundRobin para distribuir las cargas en 
 
 
 
+https://github.com/Parralol/Taller06-AREP/assets/110953563/51c9f290-c654-488e-9b78-0ac864e53db4
+
+
+
 ### Construido con
 
   * Maven
